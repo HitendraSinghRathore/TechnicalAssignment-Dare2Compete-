@@ -27,6 +27,17 @@ router.get('/', function(req, res) {
     })
 });
 
+
+//Reset all the seats back to available status -- For testing
+
+router.put('/resetSeats', function(req, res) {
+    Seats.updateMany({ status: "booked" }, { status: "available" }, function(err, docs) {
+
+        res.json(docs);
+
+    })
+})
+
 //return the seat count of available seats from the database.
 router.get('/seatCount', function(req, res, next) {
 

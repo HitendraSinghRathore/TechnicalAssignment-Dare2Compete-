@@ -212,15 +212,24 @@ app.controller("bookingCtrl", function($http, $scope) {
     Output: calls the getSeats() to get the updated seats.
     */
     b.bookSeats = function() {
-        console.log(b.seatsAllocated);
+
         $http.put("https://tck-booking.herokuapp.com/seats/bookSeats", { "seatsAllocated": b.seatsAllocated }).then(function(response) {
             b.message = {};
             b.numberOfSeats = "";
             b.seatsAllocated = [];
-            console.log(response.data);
+
             b.getSeats();
         }, function(error) {
 
+        })
+    };
+
+    b.resetSeats = function() {
+
+        $http.put("https://tck-booking.herokuapp.com/seats/resetSeats").then(function(response) {
+            b.getSeats();
+        }, function(error) {
+            console.log(error);
         })
     }
 })

@@ -50,12 +50,16 @@
                         <div class="inline-block w-12 m-2 h-2px bg-red-300 p-2 shadow shadow-lg rounded"></div>
                         <div class="p-2 text-gray-800">Booked</div>
                     </div>
+
+                </div>
+                <div class="mt-8 ml-10 ">
+                    <button class="shadow rounded shadow-md bg-red-700 text-white px-3 py-1" ng-click="b.resetSeats()">Reset</button>
                 </div>
             </div>
             <div class="w-3/4 ">
                 <div class="coach mx-auto shadow shadow-md rounded-lg p-4 ">
                     <h3 class="text-center my-2 w-full text-lg text-gray-700">Coach 1</h3>
-                    <div class="child-card inline-block rounded text-center shadow-lg mx-1 my-1 h-8" ng-repeat="seat in b.seats" ng-class="{'bg-gray-200':seat.status=='available','bg-red-300':seat.status=='booked','bg-green-300':b.seatsAllocated.indexOf(seat.number)>=0,'mr-8':(($index+5)%7==0)}">{{seat.number}}</div>
+                    <div class="child-card  inline-block rounded text-center shadow-lg mx-1 my-1 h-8" ng-repeat="seat in b.seats" ng-class="{'bg-gray-200':seat.status=='available','bg-red-300':seat.status=='booked','bg-green-300':b.seatsAllocated.indexOf(seat.number)>=0,'mr-8':(($index+5)%7==0)}">{{seat.number}}</div>
 
                 </div>
             </div>

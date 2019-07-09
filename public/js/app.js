@@ -21,7 +21,7 @@ app.controller("bookingCtrl", function($http, $scope) {
     */
     b.getSeats = function() {
         b.loading = true;
-        $http.get("http://localhost:3333/seats").then(function(response) {
+        $http.get("https://tck-booking.herokuapp.com/seats").then(function(response) {
             b.seats = response.data.data;
             b.loading = false;
 
@@ -36,7 +36,7 @@ app.controller("bookingCtrl", function($http, $scope) {
     Output: returns the number of available seats.
     */
     var getAvailableSeatCount = function() {
-            $http.get("http://localhost:3333/seats/seatCount").then(function(response) {
+            $http.get("https://tck-booking.herokuapp.com/seats/seatCount").then(function(response) {
                 return response.count;
             }, function(error) {
                 console.log("Error")
@@ -213,7 +213,7 @@ app.controller("bookingCtrl", function($http, $scope) {
     */
     b.bookSeats = function() {
         console.log(b.seatsAllocated);
-        $http.put("http://localhost:3333/seats/bookSeats", { "seatsAllocated": b.seatsAllocated }).then(function(response) {
+        $http.put("https://tck-booking.herokuapp.com/seats/bookSeats", { "seatsAllocated": b.seatsAllocated }).then(function(response) {
             b.message = {};
             b.numberOfSeats = "";
             b.seatsAllocated = [];

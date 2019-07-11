@@ -149,26 +149,68 @@ app.controller("bookingCtrl", function($http, $scope) {
 
     };
 
-    /*
-    Description: Calling fillSeats() with increasing rows, and call a fallback function in last case.
-    Input: number of seats
-    Output: returns array of selected seat numbers.
-    */
+
+
+    var bestFit = function(matrix, seats) {
+
+            var seatsAllocated = [];
+            var seat = 0;
+            var emptySeats = 0;
+
+
+            for (var i = 0; i < 12; i++) {
+                seatsAllocated = []
+                emptySeats = 0;
+                for (var j = 0; j < 7; j++) {
+                    if (matrix[i][j] != 0) {
+                        emptySeats = emptySeats + 1;
+                        seat = (i * 7) + (j + 1);
+                        seatsAllocated.push(seat);
+
+
+
+                    } else {
+                        console.log(emptySeats + " ")
+                        if (emptySeats == seats)
+                            return seatsAllocated;
+
+                        emptySeats = 0;
+                        seatsAllocated = [];
+
+                    }
+
+                }
+            }
+            return seatsAllocated;
+        }
+        /*
+        Description: Calling fillSeats() with increasing rows, and call a fallback function in last case.
+        Input: number of seats
+        Output: returns array of selected seat numbers.
+        */
     var getSeats = function(seats) {
             let matrix = populateMatrix(fillInMatrix());
             let seatsAllocated = [];
-            for (let rows = 1; rows <= seats; rows++) {
 
-                seatsAllocated = fillSeats(matrix, rows, seats);
-                if (seatsAllocated.length == seats) {
-                    break;
+            seatsAllocated = bestFit(matrix, seats);
+            if (seatsAllocated.length == seats)
+                return seatsAllocated;
+            else {
+                seatsAllocated = [];
+
+                for (let rows = 1; rows <= seats; rows++) {
+
+                    seatsAllocated = fillSeats(matrix, rows, seats);
+                    if (seatsAllocated.length == seats) {
+                        break;
+                    }
+
                 }
+                if (seatsAllocated.length == 0)
+                    seatsAllocated = justPickSeats(matrix, seats);
 
+                return seatsAllocated;
             }
-            if (seatsAllocated.length == 0)
-                seatsAllocated = justPickSeats(matrix, seats);
-
-            return seatsAllocated;
 
         }
         /*

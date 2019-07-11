@@ -170,7 +170,7 @@ app.controller("bookingCtrl", function($http, $scope) {
 
 
                     } else {
-                        console.log(emptySeats + " ")
+
                         if (emptySeats == seats)
                             return seatsAllocated;
 
@@ -180,6 +180,8 @@ app.controller("bookingCtrl", function($http, $scope) {
                     }
 
                 }
+                if (emptySeats == seats)
+                    return seatsAllocated;
             }
             return seatsAllocated;
         }

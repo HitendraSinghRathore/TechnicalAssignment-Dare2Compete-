@@ -48,7 +48,7 @@ app.controller("bookingCtrl", function($http, $scope) {
         Output: returns the matrix of seats.
         */
     var fillInMatrix = function() {
-        let matrix = new Array(12).fill().map(() => new Array(7).fill(0));
+        let matrix = new Array(21).fill().map(() => new Array(7).fill(0));
         for (var i = 0; i < b.seats.length; i++) {
             if (b.seats[i].status == "available") {
                 matrix[b.seats[i].row - 1][b.seats[i].column - 1] = 1;
@@ -79,7 +79,7 @@ app.controller("bookingCtrl", function($http, $scope) {
         let flag = 1;
         for (var j = 0; j <= 6; j++) {
             flag = 1;
-            for (var i = 11; i >= 0; i--) {
+            for (var i = 20; i >= 0; i--) {
 
                 if (matrix[i][j] == 1) {
                     matrix[i][j] = flag;
@@ -101,7 +101,7 @@ app.controller("bookingCtrl", function($http, $scope) {
     var fillSeats = function(matrix, rows, seats) {
         let seatsAllocated = [];
         let sum = 0;
-        for (let row = 0; row < 12; row++) {
+        for (let row = 0; row < 21; row++) {
             sum = 0;
             seatsAllocated = [];
             for (let col = 0; col < 7; col++) {
@@ -134,7 +134,7 @@ app.controller("bookingCtrl", function($http, $scope) {
     */
     var justPickSeats = function(matrix, seats) {
         let seatsAllocated = [];
-        for (let row = 0; row < 12; row++) {
+        for (let row = 0; row < 21; row++) {
             for (let col = 0; col < 7; col++) {
                 if (matrix[row][col] == 1) {
                     let seatNumber = (row) * 7 + (col + 1);
@@ -158,7 +158,7 @@ app.controller("bookingCtrl", function($http, $scope) {
             var emptySeats = 0;
 
 
-            for (var i = 0; i < 12; i++) {
+            for (var i = 0; i < 21; i++) {
                 seatsAllocated = []
                 emptySeats = 0;
                 for (var j = 0; j < 7; j++) {
